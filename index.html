@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ Payment - M FARHAN MARKET ⚡</title>
+    
+    <style>
+        /* CSS INTERNAL DIMULAI */
+        :root {
+            /* Palet Warna Biru Neon */
+            --main-bg-color: #0d0d21; /* Biru sangat gelap */
+            --primary-color: #00ffff; /* Cyan terang/neon */
+            --secondary-color: #0077ff; /* Biru terang */
+            --text-color: #e0f7fa; /* Putih kebiruan */
+            --dana-color: #1fc1f4;
+            --gopay-color: #00aa5b;
+        }
+
+        /* Pengaturan Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--main-bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            /* Opsional: Tambahkan background dari gambar 748232.jpg */
+            /* background-image: url('748232.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            background-blend-mode: color-dodge; /* Memberi efek dramatis */
+            */
+        }
+
+        .payment-container {
+            background: rgba(18, 18, 30, 0.95); /* Sedikit transparan, dominasi gelap */
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.6); /* Shadow menyala */
+            border: 2px solid var(--primary-color);
+            animation: pulse 2s infinite alternate; /* Efek menyala ringan */
+        }
+
+        @keyframes pulse {
+            from { box-shadow: 0 0 30px var(--primary-color), 0 0 10px var(--secondary-color); }
+            to { box-shadow: 0 0 50px var(--primary-color), 0 0 20px var(--secondary-color); }
+        }
+
+        /* Judul dan Teks */
+        .title {
+            text-align: center;
+            color: var(--primary-color);
+            font-size: 2.5em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px var(--primary-color), 0 0 30px var(--secondary-color);
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            color: var(--secondary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 8px;
+            text-shadow: 0 0 5px rgba(0, 119, 255, 0.5);
+        }
+
+        .nmid, .note {
+            text-align: center;
+            font-style: italic;
+            color: #90a4ae;
+            font-size: 0.95em;
+        }
+
+        /* QR Code */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px dashed var(--primary-color);
+        }
+
+        .qr-image {
+            width: 280px; /* Ukuran QR */
+            height: auto;
+            border-radius: 5px;
+            margin: 15px 0;
+            filter: drop-shadow(0 0 10px rgba(0, 255, 255, 1)); /* Efek menyala kuat */
+            border: 5px solid white; /* Membuat QR lebih mudah dipindai */
+        }
+        
+        /* Daftar Akun */
+        .account-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border-left: 6px solid var(--primary-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .account-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 255, 255, 0.1) 0%, rgba(0, 255, 255, 0) 100%);
+            z-index: 0;
+            transition: transform 0.5s ease;
+            transform: translateX(-100%);
+        }
+        
+        .account-item:hover::before {
+            transform: translateX(0);
+        }
+        
+        .account-item > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .platform {
+            font-weight: 800;
+            font-size: 1.2em;
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-shadow: 0 0 8px currentColor; /* Efek menyala pada tulisan platform */
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .dana {
+            color: var(--dana-color);
+        }
+
+        .gopay {
+            color: var(--gopay-color);
+        }
+
+        .account-number {
+            flex-grow: 1;
+            text-align: center;
+            font-family: 'Consolas', monospace;
+            font-size: 1.3em;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .copy-btn {
+            background-color: var(--primary-color);
+            color: var(--main-bg-color);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 5px var(--primary-color);
+        }
+
+        .copy-btn:hover {
+            background-color: var(--secondary-color);
+            box-shadow: 0 0 15px var(--primary-color), 0 0 5px var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer-text {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            font-style: italic;
+            text-shadow: 0 0 8px var(--primary-color);
+        }
+
+        /* Responsif Dasar */
+        @media (max-width: 550px) {
+            .payment-container {
+                padding: 15px;
+                max-width: 95%;
+            }
+            .account-item {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px;
+            }
+            .platform {
+                margin-bottom: 5px;
+            }
+            .account-number {
+                margin: 10px 0;
+            }
+            .copy-btn {
+                width: 100%;
+            }
+            .qr-image {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+        /* CSS INTERNAL SELESAI */
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1 class="title">Metode Pembayaran</h1>
+
+        <div class="qr-section">
+            <h2 class="section-title">QRIS (Satu QR untuk Semua)</h2>
+            <p class="nmid">NMID: ID2025385773028</p>
+            <img src="12676.png" alt="QRIS M FARHAN MARKET" class="qr-image">
+            <p class="note">Pindai QR ini menggunakan aplikasi pembayaran digital apa pun (Dana, Gopay, dll)!</p>
+        </div>
+        
+        <div class="account-list">
+            <h2 class="section-title">Transfer Digital</h2>
+
+            <div class="account-item">
+                <span class="platform dana">DANA</span>
+                <span class="account-number" id="dana-number">085758217977</span>
+                <button class="copy-btn" onclick="copyText('dana-number')">Salin</button>
+            </div>
+
+            <div class="account-item">
+                <span class="platform gopay">GOPAY</span>
+                <span class="account-number" id="gopay-number">085758217977</span>
+                <button class="copy-btn" onclick="copyText('gopay-number')">Salin</button>
+            </div>
+        </div>
+
+        <p class="footer-text">Terima kasih banyak! Pembayaran Anda membantu kami bersinar 🚀</p>
+    </div>
+
+    <script>
+        function copyText(elementId) {
+            const element = document.getElementById(elementId);
+            const textToCopy = element.textContent.trim();
+            
+            // Menggunakan Clipboard API modern
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert("Nomor " + textToCopy + " berhasil disalin!");
+            }).catch(err => {
+                // Fallback untuk browser lama
+                const textarea = document.createElement('textarea');
+                textarea.value = textToCopy;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert("Nomor " + textToCopy + " berhasil disalin! (Fallback)");
+            });
+        }
+    </script>
+</body>
+</html>
